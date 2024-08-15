@@ -1,11 +1,17 @@
 /*UTILITIES*/
 
+/*Function to generate a rng for computer */
+function rnGen(min,max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function generateCompuer(){
     let choice= rnGen(0,2);
     return choice;   
 }
 
 
+/*Translate a number into the equivalent choice 0->Rock 1->Paper 2->Scissors */
 function translateToSymbol(choice){
     let itemChoice;
     switch(choice){
@@ -23,6 +29,7 @@ function translateToSymbol(choice){
 }
 
 
+/*Translate a choice into the equivalent number 0->Rock 1->Paper 2->Scissors */
 function translateToNumber(choice){
     let itemChoice;
     switch(choice){
@@ -42,15 +49,12 @@ function translateToNumber(choice){
 }
 
 
-function rnGen(min,max){
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 
 function playerInput(){
-    let playerPrompt=("Choose R/P/S: ");
+    let playerPrompt=prompt("Choose R/P/S: ");
     return translateToNumber(playerPrompt.toLowerCase());
 }
+
 
 /*ROUND FUNCTION*/
 function round(playerInput){
@@ -70,10 +74,10 @@ function round(playerInput){
 
 
 /*GAME FUNCTION*/
-function game(playerSelection){
+function game(){
     let gameResult=0;
     for(let i = 0; i < 5; i++) {
-        let result=round(playerSelection);
+        let result=round(playerInput());
         gameResult+=result;
         if(result==-1) console.log("macth lost");
         else if(result==0) console.log("macth tied");
