@@ -31,9 +31,8 @@
 
 
 
-
-
 /*Icon styled button*/
+
 
 .icon{
     background-repeat: no-repeat;
@@ -57,8 +56,18 @@
 .icon-rock{
     background-image: url(../img/Rock.png);
 }
+.icon-paper{
+    background-image: url(../img/Paper.png);
+}.icon-scissors{
+    background-image: url(../img/Scissors.png);
+}
 
-/*Th;]]*/
+
+
+
+/*Typography*/
+
+
 .main-title{
     text-align: center;
 }
