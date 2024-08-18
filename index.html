@@ -17,13 +17,13 @@
         </div>
         <div class="row">
             <div class="button-container">
-                <button class="icon icon-rock" onclick="buttonClick()"></button>
+                <button class="icon icon-rock" onclick="round(0)"></button>
             </div>
             <div class="button-container">
-                <button class="icon icon-paper"></button>
+                <button class="icon icon-paper" onclick="round(1)"></button>
             </div>
             <div class="button-container">
-                <button class="icon icon-scissors"></button>
+                <button class="icon icon-scissors" onclick="round(2)"></button>
             </div>
         </div>
 
@@ -33,6 +33,10 @@
                 <p>Player:   </p>
                 <p>Computer:  </p>
             </div>
+            <div class="button-container">
+                <button class="icon" onclick="reset()">Reset</button>
+            </div>
+            
         </div>
         
 

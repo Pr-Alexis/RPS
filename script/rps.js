@@ -40,7 +40,7 @@ function translateToNumber(choice){
             itemChoice=1;
         break;
         case "scissors":
-            itemChoice=1;
+            itemChoice=2;
         break;
 
     }
