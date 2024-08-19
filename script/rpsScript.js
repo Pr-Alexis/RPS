@@ -44,22 +44,20 @@ function translateToNumber(choice){
 
     }
     return itemChoice;
-
 }
+
 
 
 
 /*GAME*/
 /*Game variables */
-
-let gameWon=0;
+let gameScore=matchesWon=matchesLost=0;
 
 
 /*Match funcion*/
 
 function roundCalculator(playerChoice){
     let computerSelection= generateCompuer();
-    alert("Computer chose "+translateToSymbol(computerSelection));
     
     if( (playerChoice+1)%3== computerSelection)
         return -1;
@@ -67,16 +65,32 @@ function roundCalculator(playerChoice){
         return 0;
     else 
         return 1;
-
 }
 
 function round(playerChoice){
-    gameWon+=roundCalculator(playerChoice);
-    alert(gameWon);
+
+    let playerScore= document.getElementById('playerScore');
+    let computerScore= document.getElementById('computerScore');
+
+    let roundCalc=roundCalculator(playerChoice);
+
+    if(roundCalc==-1){
+        matchesLost++;
+        computerScore.innerHTML="Computer score: "+matchesLost;
+    }
+    else if(roundCalc==1){
+        matchesWon++;
+        playerScore.innerHTML="Player score: "+matchesWon;
+    }
+
+    gameScore+= roundCalc;
 }
+
 
 
 /*Reset function */
 function reset(){
-    gameWon=0;
+    gameWon=matchesWon=matchesLost=0;
+    computerScore.innerHTML="Computer score: 0";
+    playerScore.innerHTML="Player score: 0";
 }
