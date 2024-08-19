@@ -52,16 +52,17 @@ function translateToNumber(choice){
 /*GAME*/
 /*Game variables */
 let gameScore=matchesWon=matchesLost=0;
+let roundCounter=0;
 
 
 /*Match funcion*/
 
-function roundCalculator(playerChoice){
-    let computerSelection= generateCompuer();
+function roundCalculator(playerChoice, computerChoice){
+
     
-    if( (playerChoice+1)%3== computerSelection)
+    if( (playerChoice+1)%3== computerChoice)
         return -1;
-    else if( playerChoice==computerSelection)
+    else if( playerChoice==computerChoice)
         return 0;
     else 
         return 1;
@@ -71,26 +72,53 @@ function round(playerChoice){
 
     let playerScore= document.getElementById('playerScore');
     let computerScore= document.getElementById('computerScore');
+    let roundResult= document.getElementById('roundResult');
+    let computerChoice= generateCompuer();
 
-    let roundCalc=roundCalculator(playerChoice);
+    let roundCalc=roundCalculator(playerChoice,computerChoice);
+    gameScore+= roundCalc;
+    roundCounter++;
 
     if(roundCalc==-1){
         matchesLost++;
         computerScore.innerHTML="Computer score: "+matchesLost;
+        roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+". Computer chose: "+ translateToSymbol(computerChoice)+". You lost!"+gameScore;
     }
     else if(roundCalc==1){
         matchesWon++;
         playerScore.innerHTML="Player score: "+matchesWon;
+
+        roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+" Computer chose: "+ translateToSymbol(computerChoice)+". You won!"+gameScore;
     }
+    else {
 
-    gameScore+= roundCalc;
+        roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+" Computer chose: "+ translateToSymbol(computerChoice)+". It's a tie!"+gameScore;
+    }
+    
+  
+    if(roundCounter==5){
+        setTimeout(()=>{
+        if(gameScore<0) {
+            alert("You lost! "+gameScore);
+        }
+        else if(gameScore==0){
+            alert('you tied '+gameScore)
+        }
+        else{
+            alert("Game won! "+gameScore)
+        }
+        reset();
+        }
+    ,10);
+    }   
+
 }
-
-
 
 /*Reset function */
 function reset(){
-    gameWon=matchesWon=matchesLost=0;
+    gameScore=matchesWon=matchesLost=0;
+    roundCounter=0;
     computerScore.innerHTML="Computer score: 0";
     playerScore.innerHTML="Player score: 0";
+    roundResult.innerHTML="";
 }
