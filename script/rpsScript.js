@@ -82,17 +82,17 @@ function round(playerChoice){
     if(roundCalc==-1){
         matchesLost++;
         computerScore.innerHTML="Computer score: "+matchesLost;
-        roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+". Computer chose: "+ translateToSymbol(computerChoice)+". You lost!"+gameScore;
+        roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+". Computer chose: "+ translateToSymbol(computerChoice)+". You lost!";
     }
     else if(roundCalc==1){
         matchesWon++;
         playerScore.innerHTML="Player score: "+matchesWon;
 
-        roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+" Computer chose: "+ translateToSymbol(computerChoice)+". You won!"+gameScore;
+        roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+" Computer chose: "+ translateToSymbol(computerChoice)+". You won!";
     }
     else {
 
-        roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+" Computer chose: "+ translateToSymbol(computerChoice)+". It's a tie!"+gameScore;
+        roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+" Computer chose: "+ translateToSymbol(computerChoice)+". It's a tie!";
     }
     
   
