@@ -1,10 +1,19 @@
 /*GAME*/
 /*Game variables */
-let gameScore=matchesWon=matchesLost=0;
-let roundCounter=0;
+let gameScore=0,
+    matchesWon=0,
+    matchesLost=0,
+    roundCounter=0;
+
+/*html elements*/
 let playerSelect;
 let gameResult;
-let nextRoundButton;
+
+let nextRoundButton,
+    rockButton,
+    paperButton,
+    scissorsButton;
+
 
 
 /*UTILITIES*/
@@ -18,14 +27,16 @@ function generateCompuer(){
     return choice;   
 }
 
-/*Hide/Show elements */
+
+/*Hide/Show html elements */
 function hideElement(visibleElement){
     visibleElement.style.display="none";
 }
 
 function showElement(hiddenElement){
-    hiddenElement.style.display="flex";
+    hiddenElement.style.display="flex";//Work only on flex containers
 }
+
 
 /*Translate a number into the equivalent choice 0->Rock 1->Paper 2->Scissors */
 function translateToSymbol(choice){
@@ -43,7 +54,6 @@ function translateToSymbol(choice){
     }
     return itemChoice;
 }
-
 
 /*Translate a choice into the equivalent number 0->Rock 1->Paper 2->Scissors */
 function translateToNumber(choice){
@@ -63,13 +73,22 @@ function translateToNumber(choice){
     return itemChoice;
 }
 
+/*Translate to image*/
+function translateToImage(choice){
+    if(choice==0){
+        return '/img/Rock.png'
+    }
+    else if(choice==1){
+        return '/img/Paper.png'
+    }
+    return '/img/Scissors.png'
+}
 
 
+/*GAME FUNCTIONS*/
 /*Match funcion*/
-
 function roundCalculator(playerChoice, computerChoice){
 
-    
     if( (playerChoice+1)%3== computerChoice)
         return -1;
     else if( playerChoice==computerChoice)
@@ -78,16 +97,24 @@ function roundCalculator(playerChoice, computerChoice){
         return 1;
 }
 
+/*Round function*/
 function round(playerChoice){
 
     let playerScore= document.getElementById('playerScore');
     let computerScore= document.getElementById('computerScore');
+    let playerImage= document.getElementById('playerImage');
+    let computerImage=document.getElementById('computerImage');
     let roundResult= document.getElementById('roundResult');
-    let computerChoice= generateCompuer();
 
+    let computerChoice= generateCompuer();
     let roundCalc=roundCalculator(playerChoice,computerChoice);
+
+    playerImage.src=translateToImage(playerChoice);
+    computerImage.src=translateToImage(computerChoice);
+
     gameScore+= roundCalc;
     roundCounter++;
+
 
     if(roundCalc==-1){
         matchesLost++;
@@ -104,6 +131,7 @@ function round(playerChoice){
 
         roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+" Computer chose: "+ translateToSymbol(computerChoice)+". It's a tie!";
     }
+
     
 
     hideElement(playerSelect);
@@ -128,19 +156,11 @@ function round(playerChoice){
 }
 
 
+/*Next round button*/
 function nextRound() {
     showElement(playerSelect);
     hideElement(gameResult);
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    playerSelect = document.getElementById('playerSelect');
-    gameResult = document.getElementById('gameResult');
-    
-    nextRoundButton = document.getElementById('nextRoundButton');
-    nextRoundButton.addEventListener('click', nextRound);
-
-});
 
 /*Reset function */
 function reset(){
@@ -149,4 +169,27 @@ function reset(){
     computerScore.innerHTML="Computer score: 0";
     playerScore.innerHTML="Player score: 0";
     roundResult.innerHTML="";
+    showElement(playerSelect);
+    hideElement(gameResult);
 }
+
+
+/*Button initializing function*/
+document.addEventListener('DOMContentLoaded', (event) => {
+    playerSelect = document.getElementById('playerSelect');
+    gameResult = document.getElementById('gameResult');
+    
+    nextRoundButton = document.getElementById('nextRoundButton');
+    nextRoundButton.addEventListener('click', nextRound);
+
+    rockButton=document.getElementById('rock');
+    rockButton.addEventListener('click',()=>{round(0)});
+
+
+    paperButton=document.getElementById('paper');
+    paperButton.addEventListener('click',()=>{round(1)});
+
+    scissorsButton=document.getElementById('scissors');
+    scissorsButton.addEventListener('click',()=>{round(2)});
+
+});
