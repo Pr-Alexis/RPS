@@ -18,6 +18,7 @@ body{
     width: 56%;
     min-height: 50vh;
     margin: 0 auto;
+    padding: 0 10px 0 10px;
     display: flex;
     justify-content: space-between;
     align-content: flex-start;
@@ -31,7 +32,7 @@ body{
 
 }
 
-.row{
+.box{
     width: 100%;
     min-height: 10vh;
     display: flex;
@@ -40,7 +41,10 @@ body{
     align-items: center;
     flex-wrap: wrap;
 }
-.centerRow{
+.boxNoWrap{
+    flex-wrap: nowrap;
+}
+.centerbox{
     justify-content: center;
 }
 .button-container{
@@ -50,6 +54,11 @@ body{
 
 }
 
+.padding20{
+    padding: 20px;
+    margin: 0 auto;
+}
+
 
 
 @media only screen and (max-width: 768px) {
@@ -57,7 +66,7 @@ body{
         width: 90%;
     }
     /* For mobile phones: */
-    .row{
+    .box{
         justify-content: center;
     }
 
@@ -104,6 +113,8 @@ body{
 .title-main{
     font-size: 2em;
     font-weight: 400;
+    width: 100%;
+    text-align: center;
 }
 
 .subtitle{    
@@ -115,4 +126,9 @@ body{
 p{
     font-weight: 300;
     font-size: 1em;
+}
+
+
+a{
+    color: rgba(255, 255, 255, 1);
 }

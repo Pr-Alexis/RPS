@@ -1,3 +1,12 @@
+/*GAME*/
+/*Game variables */
+let gameScore=matchesWon=matchesLost=0;
+let roundCounter=0;
+let playerSelect;
+let gameResult;
+let nextRoundButton;
+
+
 /*UTILITIES*/
 /*Function to generate a rng for computer */
 function rnGen(min,max){
@@ -9,6 +18,14 @@ function generateCompuer(){
     return choice;   
 }
 
+/*Hide/Show elements */
+function hideElement(visibleElement){
+    visibleElement.style.display="none";
+}
+
+function showElement(hiddenElement){
+    hiddenElement.style.display="flex";
+}
 
 /*Translate a number into the equivalent choice 0->Rock 1->Paper 2->Scissors */
 function translateToSymbol(choice){
@@ -46,13 +63,6 @@ function translateToNumber(choice){
     return itemChoice;
 }
 
-
-
-
-/*GAME*/
-/*Game variables */
-let gameScore=matchesWon=matchesLost=0;
-let roundCounter=0;
 
 
 /*Match funcion*/
@@ -95,7 +105,10 @@ function round(playerChoice){
         roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+" Computer chose: "+ translateToSymbol(computerChoice)+". It's a tie!";
     }
     
-  
+
+    hideElement(playerSelect);
+    showElement(gameResult);
+
     if(roundCounter==5){
         setTimeout(()=>{
         if(gameScore<0) {
@@ -113,6 +126,21 @@ function round(playerChoice){
     }   
 
 }
+
+
+function nextRound() {
+    showElement(playerSelect);
+    hideElement(gameResult);
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    playerSelect = document.getElementById('playerSelect');
+    gameResult = document.getElementById('gameResult');
+    
+    nextRoundButton = document.getElementById('nextRoundButton');
+    nextRoundButton.addEventListener('click', nextRound);
+
+});
 
 /*Reset function */
 function reset(){

@@ -6,16 +6,16 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>RPS</title>
     <script src="script/rps.js"></script>
-    <script src="script/rpsScript.js"></script>
+    <script src="script/rpsScript_2_0.js"></script>
 </head>
 <body>
 
     <div class="container">
-        <div class="box">
+        <div class="box" >
             <h1 class="title title-main">The Rock, Paper Scissors game!</h1>
-            <h2 class="subtitle"><a href="/visualResults.html">Script 2.0</a></h2>
+            <h2 class="subtitle"><a href="/index.html">Script 1.0</a></h2>
         </div>
-        <div class="box">
+        <div class="box" id="playerSelect">
             <div class="button-container">
                 <button class="icon icon-rock" onclick="round(0)"></button>
             </div>
@@ -26,8 +26,15 @@
                 <button class="icon icon-scissors" onclick="round(2)"></button>
             </div>
         </div>
-        <div class="box centerbox">
-            <h2 id="roundResult" class="subtitle"></h2>
+        <div class="box" id="gameResult">
+            <div class="box centerbox boxNoWrap">
+                <div class="box centerbox"><img src="/img/Paper.png" width="50%"></div>
+                <div class="box centerbox"><img src="/img/Paper.png" width="50%"></div>
+            </div>
+            <div class="box"><h2 id="roundResult" class="subtitle"></h2></div>
+            <div class="box centerbox">
+                <button id="nextRoundButton">Next Round</button>
+            </div>
         </div>
 
         <div class="box" >
