@@ -9,10 +9,9 @@ let gameScore=0,
 let playerSelect;
 let gameResult;
 
-let nextRoundButton,
-    rockButton,
-    paperButton,
-    scissorsButton;
+let nextRoundButton;
+
+let buttons;
 
 
 
@@ -178,18 +177,20 @@ function reset(){
 document.addEventListener('DOMContentLoaded', (event) => {
     playerSelect = document.getElementById('playerSelect');
     gameResult = document.getElementById('gameResult');
-    
+    buttons= document.querySelectorAll('div#playerSelect button');
+
+    /*Adding an event listener to each button with for each method.
+    * On click it take the id converts it into a number in order to 
+    * calculater the round result (just discovered query selector all)
+    */
+
+    buttons.forEach((button)=>{
+        button.addEventListener('click',()=>{
+            round(translateToNumber(button.id));
+        })
+    })
+
     nextRoundButton = document.getElementById('nextRoundButton');
     nextRoundButton.addEventListener('click', nextRound);
-
-    rockButton=document.getElementById('rock');
-    rockButton.addEventListener('click',()=>{round(0)});
-
-
-    paperButton=document.getElementById('paper');
-    paperButton.addEventListener('click',()=>{round(1)});
-
-    scissorsButton=document.getElementById('scissors');
-    scissorsButton.addEventListener('click',()=>{round(2)});
 
 });
