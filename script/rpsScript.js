@@ -1,3 +1,20 @@
+/*GAME*/
+/*Game variables */
+let gameScore=0,
+    matchesWon=0,
+    matchesLost=0,
+    roundCounter=0;
+
+/*html elements*/
+let playerSelect;
+let gameResult;
+
+let nextRoundButton;
+
+let buttons;
+
+
+
 /*UTILITIES*/
 /*Function to generate a rng for computer */
 function rnGen(min,max){
@@ -7,6 +24,16 @@ function rnGen(min,max){
 function generateCompuer(){
     let choice= rnGen(0,2);
     return choice;   
+}
+
+
+/*Hide/Show html elements */
+function hideElement(visibleElement){
+    visibleElement.style.display="none";
+}
+
+function showElement(hiddenElement){
+    hiddenElement.style.display="flex";//Work only on flex containers
 }
 
 
@@ -27,7 +54,6 @@ function translateToSymbol(choice){
     return itemChoice;
 }
 
-
 /*Translate a choice into the equivalent number 0->Rock 1->Paper 2->Scissors */
 function translateToNumber(choice){
     let itemChoice;
@@ -46,20 +72,22 @@ function translateToNumber(choice){
     return itemChoice;
 }
 
+/*Translate to image*/
+function translateToImage(choice){
+    if(choice==0){
+        return '/img/Rock.png'
+    }
+    else if(choice==1){
+        return '/img/Paper.png'
+    }
+    return '/img/Scissors.png'
+}
 
 
-
-/*GAME*/
-/*Game variables */
-let gameScore=matchesWon=matchesLost=0;
-let roundCounter=0;
-
-
+/*GAME FUNCTIONS*/
 /*Match funcion*/
-
 function roundCalculator(playerChoice, computerChoice){
 
-    
     if( (playerChoice+1)%3== computerChoice)
         return -1;
     else if( playerChoice==computerChoice)
@@ -68,16 +96,24 @@ function roundCalculator(playerChoice, computerChoice){
         return 1;
 }
 
+/*Round function*/
 function round(playerChoice){
 
     let playerScore= document.getElementById('playerScore');
     let computerScore= document.getElementById('computerScore');
+    let playerImage= document.getElementById('playerImage');
+    let computerImage=document.getElementById('computerImage');
     let roundResult= document.getElementById('roundResult');
-    let computerChoice= generateCompuer();
 
+    let computerChoice= generateCompuer();
     let roundCalc=roundCalculator(playerChoice,computerChoice);
+
+    playerImage.src=translateToImage(playerChoice);
+    computerImage.src=translateToImage(computerChoice);
+
     gameScore+= roundCalc;
     roundCounter++;
+
 
     if(roundCalc==-1){
         matchesLost++;
@@ -94,8 +130,12 @@ function round(playerChoice){
 
         roundResult.innerHTML='You chose: '+translateToSymbol(playerChoice)+" Computer chose: "+ translateToSymbol(computerChoice)+". It's a tie!";
     }
+
     
-  
+
+    hideElement(playerSelect);
+    showElement(gameResult);
+
     if(roundCounter==5){
         setTimeout(()=>{
         if(gameScore<0) {
@@ -114,6 +154,13 @@ function round(playerChoice){
 
 }
 
+
+/*Next round button*/
+function nextRound() {
+    showElement(playerSelect);
+    hideElement(gameResult);
+}
+
 /*Reset function */
 function reset(){
     gameScore=matchesWon=matchesLost=0;
@@ -121,4 +168,29 @@ function reset(){
     computerScore.innerHTML="Computer score: 0";
     playerScore.innerHTML="Player score: 0";
     roundResult.innerHTML="";
+    showElement(playerSelect);
+    hideElement(gameResult);
 }
+
+
+/*Button initializing function*/
+document.addEventListener('DOMContentLoaded', (event) => {
+    playerSelect = document.getElementById('playerSelect');
+    gameResult = document.getElementById('gameResult');
+    buttons= document.querySelectorAll('div#playerSelect button');
+
+    /*Adding an event listener to each button with for each method.
+    * On click it take the id converts it into a number in order to 
+    * calculater the round result (just discovered query selector all)
+    */
+
+    buttons.forEach((button)=>{
+        button.addEventListener('click',()=>{
+            round(translateToNumber(button.id));
+        })
+    })
+
+    nextRoundButton = document.getElementById('nextRoundButton');
+    nextRoundButton.addEventListener('click', nextRound);
+
+});
