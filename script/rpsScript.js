@@ -75,12 +75,12 @@ function translateToNumber(choice){
 /*Translate to image*/
 function translateToImage(choice){
     if(choice==0){
-        return '/img/Rock.png'
+        return 'img/Rock.png'
     }
     else if(choice==1){
-        return '/img/Paper.png'
+        return 'img/Paper.png'
     }
-    return '/img/Scissors.png'
+    return 'img/Scissors.png'
 }
 
 
